@@ -1,4 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using ASP_WS.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
+string connection = builder.Configuration.GetConnectionString("LocalConnection");
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
