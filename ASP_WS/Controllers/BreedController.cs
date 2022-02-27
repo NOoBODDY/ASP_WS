@@ -32,6 +32,25 @@ namespace ASP_WS.Controllers
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult Edit(int id)
+        {
+            Breed breed = _appDbContext.Breeds.First(u => u.Id == id);
+            return View(breed);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(Breed breed, int id)
+        {
+            Breed oldBreed = _appDbContext.Breeds.First(u => u.Id == id);
+            oldBreed.Description = breed.Description;
+            oldBreed.Name = breed.Name;
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+
         #endregion
+
+
     }
 }

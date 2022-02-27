@@ -19,4 +19,7 @@
     <div class="form-group">
         <label asp-for="Owner"  class="control-label">Хозяин: <a asp-controller = "Owner" asp-action="Page" asp-route-id = "@Model.OwnerId" >@Model.Owner.Name</a> </label>
     </div>
+    <div class="form-group">
+        <a class="btn btn-default" asp-controller = "Dog" asp-action="Edit" asp-route-id = "@Model.Id"> Редактировать </a>
+    </div>
 </div>

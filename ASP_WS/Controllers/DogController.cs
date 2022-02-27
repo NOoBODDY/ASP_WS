@@ -56,6 +56,40 @@ namespace ASP_WS.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult Edit(int id)
+        {
+            var Owners = _appDbContext.Owners.ToList();
+            var Breeds = _appDbContext.Breeds.ToList();
+            ViewBag.Owners = new SelectList(Owners, "Id", "Name");
+            ViewBag.Breeds = new SelectList(Breeds, "Id", "Name");
+            Dog breed = _appDbContext.Dogs.First(u => u.Id == id);
+            return View(breed);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(string Name, int BreedId, int OwnerId, DateTime Birthday, IFormFile uploadedfile, int id)
+        {
+
+            Dog oldDog = _appDbContext.Dogs.First(u => u.Id == id);
+            oldDog.Name = Name;
+            oldDog.OwnerId = OwnerId;
+            oldDog.BreedId = BreedId;
+            oldDog.Birthday = Birthday;
+            if (uploadedfile != null)
+            {
+                // путь к папке Files
+                string path = "/Files/" + uploadedfile.FileName;
+                // сохраняем файл в папку Files в каталоге wwwroot
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await uploadedfile.CopyToAsync(fileStream);
+                }
+                oldDog.AvatarPath = path;
+            }
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+
         #endregion
 
         public IActionResult Page(int id)

@@ -31,6 +31,21 @@ namespace ASP_WS.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult Edit(int id)
+        {
+            Owner owner= _appDbContext.Owners.First(u => u.Id == id);
+            return View(owner);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(Owner owner, int id)
+        {
+            Owner oldOwner = _appDbContext.Owners.First(u => u.Id == id);
+            oldOwner.Name = owner.Name;
+            oldOwner.LastName = owner.LastName;
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
         #endregion
 
 

@@ -1,0 +1,17 @@
+﻿@model ASP_WS.Models.Owner
+@{
+    ViewBag.Title = "Редактирование хозяина";
+}
+<form asp-action="Edit" asp-controller="Owner">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Имя</label>
+        <input type="text" asp-for="Name" class="form-control" value = "@Model.Name"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName" class="control-label">Описание</label>
+        <input type="text" asp-for="LastName" class="form-control" value = "@Model.LastName"/>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Отправить" asp-route-id = "@Model.Id" class="btn btn-default" />
+    </div>
+</form>
