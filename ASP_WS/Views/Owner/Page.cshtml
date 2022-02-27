@@ -1,0 +1,23 @@
+﻿@model ASP_WS.Models.Owner
+@{
+    ViewBag.Title = @Model.Name + " " + @Model.LastName;
+}
+<div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Имя: @Model.Name</label>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName" class="control-label">Фамилия: @Model.LastName</label>
+    </div>
+    <div class="form-group">
+        <table class= "table">
+            <h1 class="display-6">Собаки: </h1>
+            @foreach(var item in @Model.Dogs)
+            {
+               <tr>
+                <td> <a asp-controller = "Dog" asp-action="Page" asp-route-id = "@item.Id" >@item.Name </a> </td>
+              </tr> 
+            }
+        </table>
+    </div>
+</div>

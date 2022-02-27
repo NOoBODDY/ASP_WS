@@ -1,8 +1,21 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<ASP_WS.Models.Dog>
+@{
+    ViewData["Title"] = "Собаки";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Все собаки</h1>
+    <table class="table">
+    <tr><td>Имя</td><td>Хозяин</td><td>Порода</td><td>Дата рождения</td><td> </td></tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td> <a asp-controller = "Dog" asp-action="Page" asp-route-id = "@item.Id" >@item.Name </a> </td>
+            <td> <a asp-controller = "Owner" asp-action="Page" asp-route-id = "@item.OwnerId"> @item.Owner.Name</a></td>
+            <td> <a asp-controller = "Breed" asp-action="Page" asp-route-id = "@item.BreedId"> @item.Breed.Name </a></td>
+            <td>@item.Birthday.ToShortDateString()</td>
+            <td> <a class="btn btn-default" asp-controller = "Dog" asp-action="delete" asp-route-id = "@item.Id">Удалить</a></td> 
+        </tr>
+    }
+</table>
 </div>

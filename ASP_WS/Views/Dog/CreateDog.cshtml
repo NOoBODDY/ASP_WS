@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Добавление породы";
+}
+<form asp-action="CreateDog" asp-controller="Dog" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label  class="control-label">Имя</label>
+        <input type="text" name="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label class="control-label">Порода</label>
+        @Html.DropDownList("BreedId", ViewBag.Breeds as SelectList)
+    </div>
+    <div class="form-group">
+        <label  class="control-label">Хозяин</label>
+        @Html.DropDownList("OwnerId", ViewBag.Owners as SelectList)
+    </div>
+    <div class="form-group">
+        <label  class="control-label">Дата рождения</label>
+        <input type="date" name = "Birthday" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Фото</label>
+        <input type="file" name= "uploadedfile" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Отправить" class="btn btn-default" />
+    </div>
+</form>

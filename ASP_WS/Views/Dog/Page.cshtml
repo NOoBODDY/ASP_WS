@@ -1,0 +1,22 @@
+﻿@model ASP_WS.Models.Dog
+@{
+    ViewBag.Title = @Model.Name;
+}
+<div>
+    <div class="form-group">
+        <label class="control-label">Фото: </label>
+        <img src="@Url.Content(@Model.AvatarPath)" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Имя: @Model.Name</label>
+    </div>
+    <div class="form-group">
+        <label asp-for="Birthday"  class="control-label">Дата рождения: @Model.Birthday.ToShortDateString()</label>
+    </div>
+    <div class="form-group">
+        <label asp-for="Breed"  class="control-label">Порода:<a asp-controller = "Breed" asp-action="Page" asp-route-id = "@Model.BreedId"> @Model.Breed.Name </a> </label>
+    </div>
+    <div class="form-group">
+        <label asp-for="Owner"  class="control-label">Хозяин: <a asp-controller = "Owner" asp-action="Page" asp-route-id = "@Model.OwnerId" >@Model.Owner.Name</a> </label>
+    </div>
+</div>
